@@ -1,0 +1,1 @@
+# G'Basic Editor :d. Work in progress.
