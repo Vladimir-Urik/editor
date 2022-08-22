@@ -1,5 +1,5 @@
 <template>
-    <div class="layout">
+    <div class="layout" @dragover.prevent @drop.stop.prevent="onDrop">
         <Sidebar />
         <div class="layout__data">
             <FilesNavBar />
@@ -21,3 +21,26 @@
         }
     }
 </style>
+
+<script>
+export default {
+    layout: 'classic',
+    methods: {
+        onDrop(e) {
+            for(var i in e.dataTransfer.files) {
+                const file = e.dataTransfer.files[i];
+                
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const data = event.target.result;
+                    const parsedFile = loadFile(file.name, "local/"+ file.name, data)
+
+                    files.addFile(parsedFile);
+                };
+
+                reader.readAsText(file, 'utf-8');
+            }
+        },
+    }
+}
+</script>

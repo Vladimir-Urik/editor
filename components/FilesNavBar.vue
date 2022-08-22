@@ -24,14 +24,11 @@ export default {
             const fileId = route.params.id;
             selected = fileId;
         }
-
-        const files = useFiles();
-
         const modals = useModals();
         const create = modals.name === 'createFile';
 
         return {
-            files: files,
+            files: files.data,
             selected: selected,
             create: create,
             fileName: '',
@@ -47,12 +44,9 @@ export default {
     methods: {
         changeFile(fileId) {
             this.menu.open = false;
-
-            console.log('Changing file to: ', fileId)
             this.$router.push('/file/' + fileId);
         },
         closeFile(fileId) {
-            console.log('Closing file: ', fileId)
             if(this.selected === fileId) {
                 if(this.files.length > 1) {
                     const file = this.files[0].id
@@ -93,7 +87,7 @@ export default {
                             const id = Math.floor(Math.random() * 1000000000000);
                             const name = id + '.txt';
 
-                            const file = createFile(name, id + "", this.fileName.split('.')[1], 'local/' + name);
+                            const file = createNewFile(name, 'local/' + name);
                             this.addFile(file);
                         }
                     } else {
@@ -111,9 +105,7 @@ export default {
                     }
 
                     this.fileNameError = undefined
-                    const id = Math.floor(Math.random() * 1000000000000);
-                    
-                    const file = createFile(this.fileName, id + "", this.fileName.split('.')[1], 'local/' + this.fileName);
+                    const file = createNewFile(this.fileName, 'local/' + this.fileName);
                     this.addFile(file);
                 }
             } else {
@@ -122,10 +114,8 @@ export default {
         },
         
         addFile(file) {
-            this.files.push(file)
+            files.addFile(file);
             this.$router.push('/file/'+ file.id);
-
-
             this.create = false
             this.fileName = ''
         },

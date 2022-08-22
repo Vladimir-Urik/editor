@@ -30,11 +30,9 @@ export default {
     },
     methods: {
         openFile() {
-            console.log('Emiting: ', this.fileId)
             this.$emit("select", this.fileId)
         },
         closeFile() {
-            console.log('Closing file: ', this.fileId)
             this.$emit("close", this.fileId)
         },
 

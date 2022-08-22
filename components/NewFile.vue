@@ -9,7 +9,6 @@ export default {
     name: "NewFile",
     methods: {
         createFile() {
-            console.log('Creating!')
             this.$emit("create")
         }
     }

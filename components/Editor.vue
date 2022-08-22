@@ -1,10 +1,10 @@
 <template>
    <div class="editor">
     <div class="editor__numbers">
-        <span class="editor__number" v-for="(line, index) in content.split('\\n')" :id="'number-'+ index" @click="changeLine(index)">{{index+1}}</span>
+        <span class="editor__number" v-for="(line, index) in content.split('\n')" :id="'number-'+ index" @click="changeLine(index)">{{index+1}}</span>
     </div>
     <div class="editor__code">
-        <div class="editor__code--line" @click="launchEditor" v-for="(line, index) in content.split('\\n')" :id="'line-'+ index" :empty="line.length < 1">{{line}}</div>
+        <div class="editor__code--line" @click="launchEditor" v-for="(line, index) in content.split('\n')" :id="'line-'+ index" :empty="line.length < 1">{{line}}</div>
     </div>
    </div>
 
@@ -28,7 +28,6 @@ export default {
     },
     methods: {
         launchEditor(event) {
-            console.log(event)
             const line = event.target;
             const lineId = line.id.split('-')[1];
 
@@ -63,7 +62,6 @@ export default {
     mounted() {
         const lastElement = document.querySelector('.editor__code').lastElementChild;
         const lastElementId = lastElement.id.split('-')[1];
-        console.log(lastElementId);
 
         this.changeLine(lastElementId);
 
