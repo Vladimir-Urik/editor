@@ -11,6 +11,7 @@
  - Easy to extend 🎟️
  - File editor 🎟️
  - File explorer 🎟️
+ - Notifications 🧪
 > Legend: 🧪 - In development (Is available in preview), 🎟️ - Planned
 
 ## Roadmap
@@ -20,6 +21,7 @@
  - [ ] Easy to extend
  - [ ] File editor
  - [ ] File explorer
+ - [x] Notifications
 
 ## Contributing
  - If you have any ideas, feel free to open an issue or a pull request. If you want to contribute, please read the [Contributing](CONTRIBUTING.md) file.
@@ -35,3 +37,4 @@
  ![Editor](https://i.imgur.com/viaBtCA.png)
  ![File-Create-Moda](https://i.imgur.com/TcQvbvS.png)
  ![Context-Menu](https://i.imgur.com/G4bhoNG.png)
+ ![Notifications](https://i.imgur.com/qctgKF2.png)
