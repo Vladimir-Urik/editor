@@ -19,19 +19,6 @@
     </NuxtLayout>
 </template>
 
-<script>
-export default {
-    mounted: function () {
-        this.$notify('INFO', 'Technical Preview Version', 'This is the technical preview of Simple Editor! If you find a bug then please report on github!', [{
-            title: 'Open GitHub',
-            callback: function () {
-                location.href = "https://github.com/Vladimir-Urik/editor"
-            }
-        }], "technical-preview-notification")
-    },
-}
-</script>
-
 <style lang="scss" scoped>
     .home {
         width: 100%;

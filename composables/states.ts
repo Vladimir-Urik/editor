@@ -1,5 +1,6 @@
 import type { File } from './file';
 import type { Notification } from '~~/plugins/notifications/interfaces';
+import { Command } from '~~/plugins/commands/interfaces';
 
 export const files = reactive({
     data: [],
@@ -16,6 +17,19 @@ export const notifications = reactive({
     },
     removeNotification(id: string) {
         this.data = this.data.filter(notification => notification.id !== id);
+    }
+})
+
+export const commands = reactive({
+    data: [],
+    addCommand(cmd: Command) {
+        const optionalCommand = this.data.fin(c => c.name === cmd.name);
+        if(optionalCommand) return;
+
+        this.data.push(cmd);
+    },
+    removeCommand(cmd: string) {
+        this.data = this.data.filter(c => c.name !== cmd);
     }
 })
 

@@ -13,3 +13,21 @@
     margin: 0;
   }
 </style>
+
+<script>
+import { registerAllCommands } from './plugins/commands/default';
+
+  export default {
+    mounted: function () {
+      this.$notify('INFO', 'Technical Preview Version', 'This is the technical preview of Simple Editor! If you find a bug then please report on github!', [{
+            title: 'Open GitHub',
+            callback: function () {
+                location.href = "https://github.com/Vladimir-Urik/editor"
+            }
+      }], "technical-preview-notification")
+
+        registerAllCommands(this.$registerCommand)
+    }
+
+  }
+</script>
