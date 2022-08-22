@@ -59,16 +59,6 @@ export default {
             line.classList.add('editor__code--line__focused');
         }
     },
-    mounted() {
-        const lastElement = document.querySelector('.editor__code').lastElementChild;
-        const lastElementId = lastElement.id.split('-')[1];
-
-        this.changeLine(lastElementId);
-
-        const lastElementHeight = lastElement.offsetHeight;
-        const width = lastElement.offsetWidth;
-    }
-
 }
 </script>
 
