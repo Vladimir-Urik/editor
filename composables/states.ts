@@ -23,7 +23,7 @@ export const notifications = reactive({
 export const commands = reactive({
     data: [],
     addCommand(cmd: Command) {
-        const optionalCommand = this.data.fin(c => c.name === cmd.name);
+        const optionalCommand = this.data.find(c => c.name === cmd.name);
         if(optionalCommand) return;
 
         this.data.push(cmd);
