@@ -16,14 +16,20 @@
                 </div>
             </div>
         </div>
-
-        <span class="preview-badge">
-            Preview version
-        </span>
     </NuxtLayout>
 </template>
 
 <script>
+export default {
+    mounted: function () {
+        this.$notify('INFO', 'Technical Preview Version', 'This is the technical preview of Simple Editor! If you find a bug then please report on github!', [{
+            title: 'Open GitHub',
+            callback: function () {
+                location.href = "https://github.com/Vladimir-Urik/editor"
+            }
+        }], "technical-preview-notification")
+    },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,19 +83,5 @@
                 }
             }
         }
-    }
-
-    .preview-badge {
-        position: absolute;
-        bottom: 15px;
-        right: 15px;
-        padding: 8px;
-        background-color: rgb(23, 23, 23);
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.137);
-        color: rgb(196, 196, 196);
-        border-radius: 5px;
-        text-transform: uppercase;
-        transition: 0.2s;
-        font-size: 14px;
     }
 </style>

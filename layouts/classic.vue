@@ -5,6 +5,7 @@
             <FilesNavBar />
             <slot />
         </div>
+        <NotificationsContainer />
     </div>
 </template>
 
