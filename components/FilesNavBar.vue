@@ -1,12 +1,12 @@
 <template>
     <div class="files">
         <HomeButton />
-        <File v-for="file in files" @ctxm="openContextMenu" :file="file.name" :fileId="file.id" :fileType="file.type" :selected="file.id === selected" @select="changeFile" @close="closeFile" />
+        <File v-for="file in files.data" @ctxm="openContextMenu" :file="file.name" :fileId="file.id" :fileType="file.type" :selected="file.id === selected" @select="changeFile" @close="closeFile" />
         <NewFile @create="openModal" />
     </div>
 
 
-    <Modal :show="create" title="Create New File" okButton="Create" closeButton="Close" @close="closeModal" @ok="createNewFile">
+    <Modal :show="modals.name == 'createFile'" title="Create New File" okButton="Create" closeButton="Close" @close="closeModal" @ok="createNewFile">
         <Input type="text" label="File name:" @input="updateFileName" :error="fileNameError" />
     </Modal>
  
@@ -24,13 +24,9 @@ export default {
             const fileId = route.params.id;
             selected = fileId;
         }
-        const modals = useModals();
-        const create = modals.name === 'createFile';
 
         return {
-            files: files.data,
             selected: selected,
-            create: create,
             fileName: '',
             fileNameError: undefined,
             menu: {
@@ -48,7 +44,7 @@ export default {
         },
         closeFile(fileId) {
             if(this.selected === fileId) {
-                if(this.files.length > 1) {
+                if(files.data.length > 1) {
                     const file = this.files[0].id
                     this.$router.push('/file/' + file);
                 } else {
@@ -56,7 +52,7 @@ export default {
                 }
             }
 
-            this.files = this.files.filter(file => file.id !== fileId)
+            files.removeFile(fileId);
         },
 
         updateFileName(event) {
@@ -81,7 +77,7 @@ export default {
                 if(this.fileName.startsWith('#')) {
                     if(this.fileName == '#C50F') {
                         this.fileNameError = undefined;
-                        this.create = false;
+                        modals.hideModal();
 
                         for(var i = 0; i < 50; i++) {
                             const id = Math.floor(Math.random() * 1000000000000);
@@ -116,14 +112,14 @@ export default {
         addFile(file) {
             files.addFile(file);
             this.$router.push('/file/'+ file.id);
-            this.create = false
+            modals.hideModal();
             this.fileName = ''
         },
 
         openContextMenu(e) {
             const fileId = e.fileId;
 
-            const fileDetails = this.files.find(file => file.id === fileId);
+            const fileDetails = files.getFile(fileId);
             if(fileDetails == undefined) return;
 
             const x = e.clientX;
@@ -147,19 +143,15 @@ export default {
 
         openModal() {
             this.fileName = '';
-            this.create = true
 
-            const modals = useModals();
-            modals.name = 'createFile';
+            modals.showModal('createFile');
         },
 
         closeModal() {
-            this.create = false; 
             this.fileName = ''; 
             this.fileNameError = undefined;
 
-            const modals = useModals();
-            modals.name = '';
+            modals.hideModal();
         }
     }
 }

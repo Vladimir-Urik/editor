@@ -7,6 +7,15 @@ export const files = reactive({
 
     addFile(file: File) {
         this.data.push(file);
+    },
+    setFiles(files: File[]) {
+        this.data = files;
+    },
+    removeFile(id: string) {
+        this.data = this.data.filter(file => file.id !== id);
+    },
+    getFile(id: string): File {
+        return this.data.find(file => file.id === id);
     }
 });
 
@@ -33,8 +42,12 @@ export const commands = reactive({
     }
 })
 
-export const useModals = () => useState('modal', () => {
-    return {
-        'name': ''
+export const modals = reactive({
+    name: '',
+    showModal(name: string) {
+        this.name = name;
+    },
+    hideModal(name: string) {
+        this.name = '';
     }
 });
